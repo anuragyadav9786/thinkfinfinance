@@ -7,6 +7,7 @@ import Services from "@/components/landing/services";
 import BetterPath from "@/components/landing/better-path";
 import Testimonials from "@/components/landing/testimonials";
 import Team from "@/components/landing/team";
+import ScheduleAppointment from "@/components/landing/schedule-appointment";
 import Footer from "@/components/landing/footer";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 
@@ -30,6 +31,7 @@ export default function Home() {
         <BetterPath />
         <Testimonials />
         <Team />
+        <ScheduleAppointment />
       </main>
       <Footer contactMessage={contactMessage} setContactMessage={setContactMessage} />
       <ScrollToTopButton />
