@@ -116,7 +116,7 @@ export default function SipCalculator() {
           </div>
         </div>
       </main>
-      <Footer contactMessage="" setContactMessage={() => {}} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );

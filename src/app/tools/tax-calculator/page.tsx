@@ -231,7 +231,7 @@ export default function TaxCalculator() {
             </div>
         </div>
       </main>
-      <Footer contactMessage="" setContactMessage={() => {}} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );

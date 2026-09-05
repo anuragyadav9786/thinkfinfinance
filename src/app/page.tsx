@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Header from "@/components/landing/header";
 import Hero from "@/components/landing/hero";
+import TrustStrip from "@/components/landing/trust-strip";
 import Services from "@/components/landing/services";
+import Calculators from "@/components/landing/calculators";
 import BetterPath from "@/components/landing/better-path";
 import Testimonials from "@/components/landing/testimonials";
 import Team from "@/components/landing/team";
@@ -12,13 +13,10 @@ import Footer from "@/components/landing/footer";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 
 export default function Home() {
-  const [contactMessage, setContactMessage] = useState("");
-
-  const handleSetMessage = (serviceTitle: string) => {
-    setContactMessage(`I'd like to inquire about your ${serviceTitle} service.`);
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+  const handleLetsTalk = () => {
+    const scheduleSection = document.getElementById("schedule");
+    if (scheduleSection) {
+      scheduleSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -27,13 +25,15 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <Services onLetsTalk={handleSetMessage} />
+        <TrustStrip />
+        <Services onLetsTalk={handleLetsTalk} />
+        <Calculators />
         <BetterPath />
         <Testimonials />
         <Team />
         <ScheduleAppointment />
       </main>
-      <Footer contactMessage={contactMessage} setContactMessage={setContactMessage} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );

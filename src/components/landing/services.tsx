@@ -50,7 +50,7 @@ const services = [
 type Service = typeof services[0];
 
 interface ServicesProps {
-  onLetsTalk: (serviceTitle: string) => void;
+  onLetsTalk: () => void;
 }
 
 export default function Services({ onLetsTalk }: ServicesProps) {
@@ -60,7 +60,7 @@ export default function Services({ onLetsTalk }: ServicesProps) {
 
   const handleLetsTalk = () => {
     if (selectedService) {
-      onLetsTalk(selectedService.title);
+      onLetsTalk();
       setSelectedService(null);
     }
   };

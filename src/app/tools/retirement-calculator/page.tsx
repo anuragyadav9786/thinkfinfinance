@@ -252,7 +252,7 @@ export default function RetirementCalculator() {
             </div>
         </div>
       </main>
-      <Footer contactMessage="" setContactMessage={() => {}} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );

@@ -246,7 +246,7 @@ export default function ChildEducationPlanner() {
             </div>
         </div>
       </main>
-      <Footer contactMessage="" setContactMessage={() => {}} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );

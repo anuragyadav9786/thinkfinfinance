@@ -7,11 +7,6 @@ import { Separator } from "@/components/ui/separator";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 
 export default function TermsOfService() {
-  const handleSetMessage = (message: string) => {
-    // Dummy handler for the footer component
-    console.log("Set message to:", message);
-  };
-
   return (
     <div className="flex flex-col min-h-dvh bg-background">
       <Header />
@@ -76,7 +71,7 @@ export default function TermsOfService() {
           </div>
         </div>
       </main>
-      <Footer contactMessage="" setContactMessage={handleSetMessage} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );

@@ -6,13 +6,6 @@ import { Separator } from "@/components/ui/separator";
 import ScrollToTopButton from "@/components/common/scroll-to-top-button";
 
 export default function PrivacyPolicy() {
-  // Dummy props for Footer, as it might require them
-  // In a real app, you might want a more generic footer or layout
-  const handleSetMessage = (message: string) => {
-    // In a real app, you might want to handle this differently
-    console.log("Set message to:", message);
-  };
-
   return (
     <div className="flex flex-col min-h-dvh bg-background">
       <Header />
@@ -83,11 +76,7 @@ export default function PrivacyPolicy() {
           </div>
         </div>
       </main>
-      {/* 
-        This is a simplified footer for the privacy page. 
-        It needs the props that the original footer component expects.
-      */}
-      <Footer contactMessage="" setContactMessage={handleSetMessage} />
+      <Footer />
       <ScrollToTopButton />
     </div>
   );
