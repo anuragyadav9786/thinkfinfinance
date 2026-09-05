@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import TopLoader from "@/components/common/top-loader";
+import LeadCaptureModal from "@/components/landing/lead-capture-modal";
+import WhatsAppButton from "@/components/common/whatsapp-button";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -28,6 +30,8 @@ export default function RootLayout({
         </Suspense>
         {children}
         <Toaster />
+        <LeadCaptureModal />
+        <WhatsAppButton />
       </body>
     </html>
   );
