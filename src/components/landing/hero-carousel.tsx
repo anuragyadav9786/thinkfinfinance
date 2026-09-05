@@ -7,18 +7,18 @@ import { goalPortfolios, type GoalPortfolio } from "@/components/landing/goal-po
 
 const AUTO_ADVANCE_MS = 4000;
 const SWIPE_THRESHOLD = 40;
-const CARD_W = 280;
-const CARD_H = 350;
+const CARD_W = 240;
+const CARD_H = 260;
 
 type OffsetStyle = { x: number; scale: number; opacity: number; z: number; rotate: number };
 
 // Card layout by signed distance from the active card (0 = center).
 const OFFSET_STYLES: Record<number, OffsetStyle> = {
   0: { x: 0, scale: 1, opacity: 1, z: 30, rotate: 0 },
-  1: { x: 190, scale: 0.78, opacity: 0.55, z: 20, rotate: -8 },
-  [-1]: { x: -190, scale: 0.78, opacity: 0.55, z: 20, rotate: 8 },
-  2: { x: 340, scale: 0.55, opacity: 0.25, z: 10, rotate: -12 },
-  [-2]: { x: -340, scale: 0.55, opacity: 0.25, z: 10, rotate: 12 },
+  1: { x: 165, scale: 0.78, opacity: 0.55, z: 20, rotate: -8 },
+  [-1]: { x: -165, scale: 0.78, opacity: 0.55, z: 20, rotate: 8 },
+  2: { x: 295, scale: 0.55, opacity: 0.25, z: 10, rotate: -12 },
+  [-2]: { x: -295, scale: 0.55, opacity: 0.25, z: 10, rotate: 12 },
 };
 
 const ALLOCATION_COLORS = ["bg-primary", "bg-[hsl(var(--chart-4))]", "bg-muted-foreground/40"];
@@ -79,7 +79,7 @@ export default function HeroCarousel({ onActiveChange }: HeroCarouselProps) {
   return (
     <div className="w-full">
       <div
-        className="relative mx-auto h-[380px] sm:h-[400px] w-full max-w-3xl select-none"
+        className="relative mx-auto h-[280px] w-full max-w-3xl select-none"
         style={{ perspective: "1200px" }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -114,16 +114,16 @@ export default function HeroCarousel({ onActiveChange }: HeroCarouselProps) {
                 zIndex: style.z,
               }}
             >
-              <div className="flex h-full flex-col p-6 text-left">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                  <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} />
+              <div className="flex h-full flex-col p-4 text-left">
+                <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/10">
+                  <Icon className="h-4 w-4 text-primary" strokeWidth={1.75} />
                 </div>
-                <h3 className="font-headline text-lg font-semibold">{goal.name}</h3>
+                <h3 className="font-headline text-base font-semibold">{goal.name}</h3>
                 <p className="mt-1 text-sm font-medium text-primary">{goal.target}</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{goal.blurb}</p>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">{goal.blurb}</p>
 
-                <div className="mt-auto space-y-2 pt-4">
-                  <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-muted">
+                <div className="mt-auto space-y-1.5 pt-2">
+                  <div className="flex h-2 w-full overflow-hidden rounded-full bg-muted">
                     {goal.allocation.map((slice, i) => (
                       <div
                         key={slice.label}
@@ -133,7 +133,7 @@ export default function HeroCarousel({ onActiveChange }: HeroCarouselProps) {
                       />
                     ))}
                   </div>
-                  <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                  <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
                     {goal.allocation.map((slice) => (
                       <span key={slice.label}>
                         {slice.label} {slice.pct}%
@@ -150,7 +150,7 @@ export default function HeroCarousel({ onActiveChange }: HeroCarouselProps) {
         })}
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-4">
+      <div className="mt-4 flex items-center justify-center gap-4">
         <button
           type="button"
           aria-label="Previous goal"

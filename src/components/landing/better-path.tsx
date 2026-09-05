@@ -27,7 +27,7 @@ export default function BetterPath() {
              data-in-view={isIntersecting}
           >
             <div className="absolute inset-0 bg-secondary/30 rounded-full blur-3xl -z-10 transform -translate-x-1/4 translate-y-1/4 w-3/4 h-3/4"></div>
-            <div className="w-[550px] h-[550px] overflow-hidden rounded-xl">
+            <div className="w-[550px] h-[550px] overflow-hidden rounded-2xl">
                  <Image
                     src="/homepage/image-2.png"
                     alt="Happy person using a phone"

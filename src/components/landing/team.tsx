@@ -48,7 +48,9 @@ export default function Team() {
           {teamMembers.map((member, i) => (
             <Card 
               key={member.name} 
-              className={cn("overflow-hidden text-center animated-component")}
+              className={cn(
+                "overflow-hidden text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl animated-component"
+              )}
               style={{ transitionDelay: `${i * 150}ms` }}
               data-in-view={isIntersecting}
             >

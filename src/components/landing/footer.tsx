@@ -185,11 +185,7 @@ export default function Footer({ contactMessage, setContactMessage }: FooterProp
             </div>
             <div className="flex items-center gap-3">
               <Phone className="h-5 w-5 text-primary" />
-              <p>
-                +91 7290010081
-                <br />
-                +91 7290010082
-              </p>
+              <p>+91 7503080522</p>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="h-5 w-5 text-primary" />

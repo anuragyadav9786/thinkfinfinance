@@ -93,7 +93,7 @@ export default function Services({ onLetsTalk }: ServicesProps) {
             <Card
               key={service.title}
               className={cn(
-                "flex flex-col items-center text-center p-6 hover:shadow-lg transition-shadow duration-300 cursor-pointer animated-component"
+                "flex flex-col items-center text-center p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl cursor-pointer animated-component"
               )}
               style={{ transitionDelay: `${i * 100}ms` }}
               data-in-view={isIntersecting}

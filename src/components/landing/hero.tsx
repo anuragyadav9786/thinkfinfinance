@@ -16,23 +16,23 @@ export default function Hero() {
   const [activeGoal, setActiveGoal] = useState<GoalPortfolio>(goalPortfolios[0]);
 
   return (
-    <section ref={ref} className="relative w-full py-20 md:py-28 lg:py-32 bg-card overflow-hidden">
+    <section ref={ref} className="relative w-full py-6 md:py-8 bg-card overflow-hidden">
       <div className="container max-w-7xl px-4 md:px-6 mx-auto">
         <div
           className={cn("mx-auto max-w-3xl text-center animated-component")}
           data-in-view={isIntersecting}
         >
           <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm">Goal-Based Investing</div>
-          <h1 className="mt-5 font-headline text-4xl font-bold tracking-tighter sm:text-5xl lg:text-6xl text-gray-900 dark:text-gray-50">
+          <h1 className="mt-3 font-headline text-4xl font-bold tracking-tighter sm:text-5xl text-gray-900 dark:text-gray-50">
             Map Your Life Goals to the Right Portfolio
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
+          <p className="mx-auto mt-3 max-w-3xl text-base text-muted-foreground md:text-lg">
             {"Every milestone — retirement, your child's education, a new home — needs a different mix of risk and time. We structure your investments around each goal, not just the market."}
           </p>
         </div>
 
         <div
-          className={cn("mt-14 animated-component")}
+          className={cn("mt-6 animated-component")}
           style={{ transitionDelay: "150ms" }}
           data-in-view={isIntersecting}
         >
@@ -40,18 +40,18 @@ export default function Hero() {
         </div>
 
         <div
-          className={cn("mt-10 flex flex-col items-center gap-3 animated-component")}
+          className={cn("mt-4 flex flex-col items-center gap-2 animated-component")}
           style={{ transitionDelay: "250ms" }}
           data-in-view={isIntersecting}
         >
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button asChild size="lg">
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="default">
               <Link href={constants.advisorAppLink}>
                 {activeGoal.cta}
                 <ArrowRight />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="default" variant="outline">
               <Link href="#services">Learn More</Link>
             </Button>
           </div>
