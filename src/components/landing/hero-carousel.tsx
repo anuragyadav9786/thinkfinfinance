@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, type TouchEvent } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef, useCallback, type ReactNode, type TouchEvent } from "react";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { goalPortfolios, type GoalPortfolio } from "@/components/landing/goal-portfolios";
+import Sparkline from "@/components/landing/sparkline";
 
 const AUTO_ADVANCE_MS = 4000;
 const SWIPE_THRESHOLD = 40;
-const CARD_W = 240;
-const CARD_H = 260;
+const CARD_W = 250;
+const CARD_H = 290;
 
 type OffsetStyle = { x: number; scale: number; opacity: number; z: number; rotate: number };
 
@@ -79,7 +81,7 @@ export default function HeroCarousel({ onActiveChange }: HeroCarouselProps) {
   return (
     <div className="w-full">
       <div
-        className="relative mx-auto h-[280px] w-full max-w-3xl select-none"
+        className="relative mx-auto h-[310px] w-full max-w-3xl select-none"
         style={{ perspective: "1200px" }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -94,57 +96,98 @@ export default function HeroCarousel({ onActiveChange }: HeroCarouselProps) {
           const Icon = goal.icon;
           const isActiveCard = distance === 0;
 
+          const cardClassName = cn(
+            "absolute left-1/2 top-1/2 rounded-2xl border bg-card text-card-foreground shadow-xl transition-all duration-500 ease-out",
+            isActiveCard ? "border-primary cursor-pointer" : "border-border cursor-pointer hover:opacity-80",
+            !isActiveCard && "hidden sm:block"
+          );
+          const cardStyle = {
+            width: CARD_W,
+            height: CARD_H,
+            transform: `translate(-50%, -50%) translateX(${style.x}px) scale(${style.scale}) rotateY(${style.rotate}deg)`,
+            opacity: style.opacity,
+            zIndex: style.z,
+          };
+
+          const cardContent: ReactNode = (
+            <div className="flex h-full flex-col p-4 text-left">
+              {isActiveCard && (
+                <span className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              )}
+              <div className="flex items-center gap-2">
+                <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <Icon className="h-4 w-4 text-primary" strokeWidth={1.75} />
+                </div>
+                <h3 className="font-headline text-base font-semibold">{goal.name}</h3>
+              </div>
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <p className="text-sm font-medium text-primary">{goal.target}</p>
+                <p className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-muted-foreground/80">
+                  {goal.horizon}
+                </p>
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground line-clamp-1">{goal.blurb}</p>
+
+              <div className="mt-2 space-y-1.5">
+                <div className="flex h-2 w-full overflow-hidden rounded-full bg-muted">
+                  {goal.allocation.map((slice, i) => (
+                    <div
+                      key={slice.label}
+                      className={ALLOCATION_COLORS[i % ALLOCATION_COLORS.length]}
+                      style={{ width: `${slice.pct}%` }}
+                      title={`${slice.label} ${slice.pct}%`}
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
+                  {goal.allocation.map((slice) => (
+                    <span key={slice.label}>
+                      {slice.label} {slice.pct}%
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-auto border-t border-border pt-2">
+                <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground/80">
+                  Sample Top Pick
+                </span>
+                <p className="truncate text-[11px] font-semibold text-foreground">{goal.topFund}</p>
+                <Sparkline data={goal.growth} className="mt-1 h-7 w-full text-primary" />
+                <p className="text-[9px] leading-tight text-muted-foreground/70">
+                  Illustrative growth only, not a guarantee.
+                </p>
+              </div>
+            </div>
+          );
+
+          if (isActiveCard) {
+            return (
+              <Link
+                key={goal.id}
+                href={`/goals/${goal.id}`}
+                aria-label={`View full ${goal.name} plan`}
+                aria-current
+                className={cardClassName}
+                style={cardStyle}
+              >
+                {cardContent}
+              </Link>
+            );
+          }
+
           return (
             <button
               key={goal.id}
               type="button"
               aria-label={`View ${goal.name} portfolio`}
-              aria-current={isActiveCard}
               onClick={() => goTo(index)}
-              className={cn(
-                "absolute left-1/2 top-1/2 rounded-2xl border bg-card text-card-foreground shadow-xl transition-all duration-500 ease-out",
-                isActiveCard ? "border-primary cursor-default" : "border-border cursor-pointer hover:opacity-80",
-                !isActiveCard && "hidden sm:block"
-              )}
-              style={{
-                width: CARD_W,
-                height: CARD_H,
-                transform: `translate(-50%, -50%) translateX(${style.x}px) scale(${style.scale}) rotateY(${style.rotate}deg)`,
-                opacity: style.opacity,
-                zIndex: style.z,
-              }}
+              className={cardClassName}
+              style={cardStyle}
             >
-              <div className="flex h-full flex-col p-4 text-left">
-                <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/10">
-                  <Icon className="h-4 w-4 text-primary" strokeWidth={1.75} />
-                </div>
-                <h3 className="font-headline text-base font-semibold">{goal.name}</h3>
-                <p className="mt-1 text-sm font-medium text-primary">{goal.target}</p>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">{goal.blurb}</p>
-
-                <div className="mt-auto space-y-1.5 pt-2">
-                  <div className="flex h-2 w-full overflow-hidden rounded-full bg-muted">
-                    {goal.allocation.map((slice, i) => (
-                      <div
-                        key={slice.label}
-                        className={ALLOCATION_COLORS[i % ALLOCATION_COLORS.length]}
-                        style={{ width: `${slice.pct}%` }}
-                        title={`${slice.label} ${slice.pct}%`}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
-                    {goal.allocation.map((slice) => (
-                      <span key={slice.label}>
-                        {slice.label} {slice.pct}%
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground/80">
-                    {goal.horizon}
-                  </p>
-                </div>
-              </div>
+              {cardContent}
             </button>
           );
         })}

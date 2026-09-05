@@ -21,6 +21,8 @@ export interface GoalPortfolio {
   allocation: GoalAllocation[];
   blurb: string;
   cta: string;
+  topFund: string;
+  growth: number[];
 }
 
 export const goalPortfolios: GoalPortfolio[] = [
@@ -37,6 +39,8 @@ export const goalPortfolios: GoalPortfolio[] = [
     ],
     blurb: "A steady, inflation-beating mix that compounds quietly for three decades.",
     cta: "Start Your Retirement Plan",
+    topFund: "HDFC Retirement Savings Fund",
+    growth: [100, 104, 109, 107, 114, 120, 126, 135],
   },
   {
     id: "education",
@@ -51,6 +55,8 @@ export const goalPortfolios: GoalPortfolio[] = [
     ],
     blurb: "Growth-tilted allocation that de-risks automatically as admission year nears.",
     cta: "Start Your Child's Education Plan",
+    topFund: "ICICI Pru Child Care Fund (Gift Plan)",
+    growth: [100, 106, 103, 112, 119, 115, 124, 132],
   },
   {
     id: "wealth",
@@ -65,6 +71,8 @@ export const goalPortfolios: GoalPortfolio[] = [
     ],
     blurb: "An aggressive, high-conviction portfolio built for long-term compounding.",
     cta: "Start Your Wealth Creation Plan",
+    topFund: "Parag Parikh Flexi Cap Fund",
+    growth: [100, 112, 108, 125, 138, 130, 150, 165],
   },
   {
     id: "house",
@@ -79,6 +87,8 @@ export const goalPortfolios: GoalPortfolio[] = [
     ],
     blurb: "Balanced allocation that protects capital as your target date approaches.",
     cta: "Start Your Home Buying Plan",
+    topFund: "HDFC Short Term Debt Fund",
+    growth: [100, 102, 104, 103, 106, 108, 110, 113],
   },
   {
     id: "emergency",
@@ -92,5 +102,7 @@ export const goalPortfolios: GoalPortfolio[] = [
     ],
     blurb: "Capital-safe, instantly accessible funds for life's unplanned moments.",
     cta: "Start Your Emergency Fund",
+    topFund: "SBI Liquid Fund",
+    growth: [100, 100.5, 101, 101.6, 102.1, 102.8, 103.4, 104],
   },
 ];
