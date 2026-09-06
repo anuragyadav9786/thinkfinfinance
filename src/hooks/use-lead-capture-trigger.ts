@@ -1,18 +1,26 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const SESSION_KEY = "leadModalShown";
 const SCROLL_DEPTH_THRESHOLD = 0.65;
 const SCROLL_SETTLE_DELAY_MS = 200;
 
 export function useLeadCaptureTrigger() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const hasFiredRef = useRef(false);
   const hasReachedScheduleRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
+    // The /redesign route is an isolated design preview with its own
+    // styling — this modal is styled for the live site and would look out
+    // of place there. Skip arming the listeners entirely (not just hiding
+    // the dialog) so a visit there can never set the shared sessionStorage
+    // flag and silently suppress the modal on the real site afterward.
+    if (pathname?.startsWith("/redesign")) return undefined;
     if (sessionStorage.getItem(SESSION_KEY)) {
       hasFiredRef.current = true;
       return undefined;
@@ -76,7 +84,7 @@ export function useLeadCaptureTrigger() {
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mouseout", handleMouseOut);
     };
-  }, []);
+  }, [pathname]);
 
   return {
     isOpen,
