@@ -1,7 +1,16 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 const WHATSAPP_NUMBER = "917503080522";
 const DEFAULT_MESSAGE = "Hi ThinkFin, I'd like to know more about your services.";
 
 export default function WhatsAppButton() {
+  const pathname = usePathname();
+  // /redesign is an isolated design preview with its own visual language;
+  // keep it free of the live site's floating widgets.
+  if (pathname?.startsWith("/redesign")) return null;
+
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
   return (
